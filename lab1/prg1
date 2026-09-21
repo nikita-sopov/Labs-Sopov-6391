@@ -1,0 +1,50 @@
+#include <iostream>
+using namespace std;
+
+//Прямоугольный треугольник на плоскости задан координатами вершин(координаты
+//задаются константами, гипотенуза лежит на прямой y = x).Необходимо разработать
+//программу, которая позволила бы вводить с клавиатуры последовательность координат
+//точек на плоскости(признак окончания последовательности – ввод координат x = 0 и y = 0)
+//и для каждой из указанных точек выводить на экран сообщение, содержащее сведения о
+//том, попала ли точка в треугольник.
+//Катеты треугольника || осям x & y
+
+int main() 
+{
+    int q,p,y,x; //Создание переменных
+    cout<<"Enter the coordinates of the triangle"<<endl;
+    cin >> q >> p; //Ввод координат прямого угла
+    if (q != p) //Условие того, что x != y
+        do 
+        {
+          cout <<"Enter the coordinate x"<<endl; //Ввод координаы x
+          cin >> x;
+          cout <<"Enter the coordinate y"<<endl; //Ввод координаы y
+          cin >> y;
+          if (q > p) 
+            { // Прямой угол ниже прямой y = x
+                if (x<=q && y>=p && x>=y) 
+                    {
+                    cout << "Point ("<< x<<","<<y<<") is located in the triangle" << endl;
+                    }
+                else 
+                    {
+                    cout << "Point ("<< x<<","<<y<<") isn't located in the triangle" << endl;
+                    }
+            }
+            else // Прямой угол выше прямой y = x
+                if (x>=q && y<=p && y>=x) 
+                    {
+                    cout << "Point ("<< x<<","<<y<<") is located in the triangle" << endl;
+                    }
+                else 
+                    {
+                    cout << "Point ("<< x<<","<<y<<") isn't located in the triangle" << endl;
+                    }
+        }
+    while (x != 0 || y != 0); //Завершение прг
+    {
+    cout << "End of input" << endl;
+    }
+    return 0;
+}
