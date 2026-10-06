@@ -1,0 +1,70 @@
+#include <iostream>
+#include <clocale>
+
+using namespace std;
+
+int main() {
+    int a;
+    double sum=0;
+    double count=0;
+    double min=0;
+    double max=0;
+    int kr5=0;
+    int st2=0;
+    int pr1=0;
+    int pr2=0;
+    int hs=0;
+    while (true) {
+        cin >> a;
+        if (a==0) {
+            break;
+        }
+        // Пункт а
+        sum = sum+a;
+        count++;
+        
+        if(count == 1){
+            min=a;
+            max=a;
+        // Пункт б
+        }
+        if (a<min) {
+            min = a;
+        }
+        if (a>max) {
+            max = a;
+        }
+        // Пункт в
+        if ((a>0)&&(a%5==0)) kr5++;
+        // Пункт г
+        if (a > 0) { 
+            int st = a;
+            while (st % 2 == 0) {
+                st /= 2;
+            }
+            if (st == 1) {
+                st2++;
+            }
+            
+        }
+        // Пункт д
+        if (count == 1) pr1 = a;
+            else if (count == 2) {
+                pr2 = pr1;
+                pr1 = a;
+        }
+        else {
+            if (a > (pr1 + pr2)) {
+                hs++;
+            }
+            pr2 = pr1;
+            pr1 = a;
+        }
+    }
+    cout << "а)" << sum/count << endl;
+    cout << "б)" << max-min << endl;
+    cout << "в)" << kr5 << endl;
+    cout << "г)" << st2 << endl;
+    cout << "д)" << hs << endl;
+    return 0;
+}
