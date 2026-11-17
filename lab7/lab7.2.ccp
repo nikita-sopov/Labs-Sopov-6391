@@ -3,8 +3,28 @@
 
 using namespace std;
 
-int main()
-{
+//функция перемножения двух матриц размера M x M
+//C = A * B
+void multiplyMatrices(double** A, double** B, double** C, int M)
+    {
+        //обнуление результата
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < M; j++) {
+                C[i][j] = 0.0;
+            }
+        }
+
+        //перемножение
+        for (int i = 0; i < M; i++) {
+            for (int j = 0; j < M; j++) {
+                for (int k = 0; k < M; k++) {
+                    C[i][j] += A[i][k] * B[k][j];
+                }
+            }
+        }
+    }
+
+int main(){
     int M, N;
 
     cout << "Enter the number of rows (M) and columns (N) separated by a space: ";
@@ -13,20 +33,20 @@ int main()
     if (M <= 0 || N <= 0) {
         cout << "Error: matrix dimensions must be positive numbers." << endl;
         return 1;
-        }
+    }
 
     if (M != N) {
         cout << "Error: the matrix is not square (" << M << "x" << N << ")." << endl;
         return 1;
-        }
+    }
 
-    // Создаем матрицу A, заполненную нулями
+    // оздаем матрицу A, заполненную нулями
     double** A = new double*[M];
     for (int i = 0; i < M; i++) {
         A[i] = new double[M]();
     }
 
-    // Ввод матрицы построчно
+    //ввод матрицы построчно
     cout << "Enter the matrix " << M << "x" << N << ":" << endl;
     for (int i = 0; i < M; i++) {
         for (int j = 0; j < M; j++) {
@@ -49,7 +69,7 @@ int main()
         return 1;
     }
 
-    // Создаем result — копию A (это A^1)
+    //создаем result—копию A (это A^1)
     double** result = new double*[M];
     for (int i = 0; i < M; i++) {
         result[i] = new double[M];
@@ -58,43 +78,31 @@ int main()
         }
     }
 
-    // Возведение в степень: result = A^n
+    //возведение в степень:result=A^n
     for (int p = 2; p <= n; p++) {
-        // Создаем временную матрицу temp = result * A
-        double** temp = new double*[M];
+        double** temp = new double*[M];  //создаем временную матрицу temp=result*A
         for (int i = 0; i < M; i++) {
             temp[i] = new double[M]();
         }
-
-        // Умножение матриц: temp = result * A
-        for (int i = 0; i < M; i++) {
-            for (int j = 0; j < M; j++) {
-                for (int k = 0; k < M; k++) {
-                    temp[i][j] += result[i][k] * A[k][j];
-                }
-            }
-        }
-
-        // Освобождаем старый result
+    multiplyMatrices(result, A, temp, M);//умножение матриц через функцию: temp=result*A
+        //освобождаем старый result
         for (int i = 0; i < M; i++) {
             delete[] result[i];
         }
         delete[] result;
-
-        // result теперь указывает на temp
         result = temp;
     }
 
-    // Вывод результата в виде таблицы
+    //вывод результата в виде таблицы
     cout << "Resulting matrix A^" << n << ":" << endl;
     for (int i = 0; i < M; i++) {
-    for (int j = 0; j < M; j++) {
-        cout << setw(10) << fixed << setprecision(2) << result[i][j];
-    }
-    cout << endl;
+        for (int j = 0; j < M; j++) {
+            cout << setw(10) << fixed << setprecision(2) << result[i][j];
+        }
+        cout << endl;
     }
 
-    // Освобождаем память
+    //освобождаем память
     for (int i = 0; i < M; i++) {
         delete[] A[i];
         delete[] result[i];
