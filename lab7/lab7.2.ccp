@@ -40,8 +40,8 @@ int main(){
         return 1;
     }
 
-    // оздаем матрицу A, заполненную нулями
-    double** A = new double*[M];
+    //создаем матрицу A, заполненную нулями
+    double** A = new double*[M]; //выделение памяти
     for (int i = 0; i < M; i++) {
         A[i] = new double[M]();
     }
@@ -64,9 +64,9 @@ int main(){
         for (int i = 0; i < M; i++) {
             delete[] A[i];
         }
-        delete[] A;
+        delete[] A;//очиска матрицы
 
-        return 1;
+        return 52;
     }
 
     //создаем result—копию A (это A^1)
@@ -92,7 +92,6 @@ int main(){
         delete[] result;
         result = temp;
     }
-
     //вывод результата в виде таблицы
     cout << "Resulting matrix A^" << n << ":" << endl;
     for (int i = 0; i < M; i++) {
@@ -101,10 +100,8 @@ int main(){
         }
         cout << endl;
     }
-
-    //освобождаем память
     for (int i = 0; i < M; i++) {
-        delete[] A[i];
+        delete[] A[i];//освобождаем память
         delete[] result[i];
     }
     delete[] A;
